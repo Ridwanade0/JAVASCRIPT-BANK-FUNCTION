@@ -83,7 +83,7 @@ confirmWithdrawBTN.addEventListener("click", function () {
       <span id="transaction-type">Withdraw</span>
     </li>
   </ul>
-  <h5 id="amount-transact" class="ms-3">Amount Withdr: $${withdrawNumberValue}</h5>
+  <h5 id="amount-transact" class="ms-3">Amount Withdraw: $${withdrawNumberValue}</h5>
   <span class="mt-2 ms-3">Balance: $${newBalance}</span>
 </div>`;
 
