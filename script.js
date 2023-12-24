@@ -1,68 +1,93 @@
-// const balance = document.querySelector("#balance");
-// const history = document.getElementById("transaction-history");
-
-// const confirmDepositBTN = document.getElementById("deposit-input-operation");
-
-// let currentBalance = 0;
-
-// confirmDepositBTN.addEventListener('click', function() {
-//     let depositInput = document.getElementById("deposit-input-value");
-
- 
-//     let depositNumberValue = parseFloat(depositInput.value);
-
-//     if (isNaN(depositNumberValue) || depositNumberValue == "" || depositNumberValue <= 0 ) {
-//         alert("enter valid deposit amount")
-//         return;
-//     }
-
-//     let newBalance = currentBalance + depositNumberValue;
-
-//     console.log(newBalance);
-
-//     currentBalance = newBalance;
-
-//     balance.textContent = newBalance.toFixed(2);
-
-//     depositInput.value = "";
-
-
-// });
-
-
 const balanceElement = document.querySelector("#balance");
 const historyElement = document.getElementById("transaction-history");
 const confirmDepositBTN = document.getElementById("deposit-input-operation");
-
+const confirmWithdrawBTN = document.getElementById("withdraw-input-operation");
+const confirmTransferBTN = document.getElementById("transfer-input-operation");
 // Load the current balance from localStorage or default to 0
 let currentBalance = parseFloat(localStorage.getItem("currentBalance")) || 0;
 
 // Set the initial balance on the page
 balanceElement.textContent = currentBalance.toFixed(2);
 
-confirmDepositBTN.addEventListener('click', function() {
-    let depositInput = document.getElementById("deposit-input-value");
-    let depositNumberValue = parseFloat(depositInput.value);
+confirmDepositBTN.addEventListener("click", function () {
+  let depositInput = document.getElementById("deposit-input-value");
+  let depositNumberValue = parseFloat(depositInput.value);
 
-    if (isNaN(depositNumberValue)) {
-        console.error("Error: Invalid or empty input in 'deposit-input-value'.");
-        return; // Exit the function to avoid further errors
-    }
+  if (
+    isNaN(depositNumberValue) ||
+    depositNumberValue == "" ||
+    depositNumberValue <= 0
+  ) {
+    alert("enter valid input");
+    return; // Exit the function to avoid further errors
+  }
 
-    let newBalance = currentBalance + depositNumberValue;
+  let newBalance = currentBalance + depositNumberValue;
 
-    console.log(newBalance);
+  console.log(newBalance);
 
-    // Update currentBalance and store it in localStorage
-    currentBalance = newBalance;
-    localStorage.setItem("currentBalance", currentBalance.toString());
+  // Update currentBalance and store it in localStorage
+  currentBalance = newBalance;
+  localStorage.setItem("currentBalance", currentBalance.toString());
 
-    // Update the balance on the page
-    balanceElement.textContent = newBalance.toFixed(2);
+  depositInput.value = "";
 
-    // Additional: You can add the transaction to the history if needed
-    // historyElement.innerHTML += `<div>Deposit: ${depositNumberValue.toFixed(2)}</div>`;
+  // Update the balance on the page
+  balanceElement.textContent = newBalance.toFixed(2);
+});
+confirmWithdrawBTN.addEventListener("click", function () {
+  let withdrawInput = document.getElementById("withdraw-input-value");
+  let withdrawNumberValue = parseFloat(withdrawInput.value);
+
+  if (
+    isNaN(withdrawNumberValue) ||
+    withdrawNumberValue == "" ||
+    withdrawNumberValue <= 0 ||
+    withdrawNumberValue > currentBalance
+  ) {
+    alert("enter valid input");
+    return;
+  }
+
+  let newBalance = currentBalance - withdrawNumberValue;
+
+  console.log(newBalance);
+
+  // Update currentBalance and store it in localStorage
+  currentBalance = newBalance;
+  localStorage.setItem("currentBalance", currentBalance.toString());
+
+  withdrawInput.value = "";
+
+  // Update the balance on the page
+  balanceElement.textContent = newBalance.toFixed(2);
 });
 
-// Additional: If you want to clear the stored balance (e.g., on logout)
-// localStorage.removeItem("currentBalance");
+confirmTransferBTN.addEventListener("click", function () {
+  let transferInput = document.getElementById("transfer-input-value");
+  let transferNumberValue = parseFloat(transferInput.value);
+  let recipientName = document.getElementById("recipient-name");
+
+  if (
+    isNaN(transferNumberValue) ||
+    transferNumberValue == "" ||
+    transferNumberValue <= 0 ||
+    transferNumberValue > currentBalance
+  ) {
+    alert("enter valid input");
+    return;
+  }
+
+  let newBalance = currentBalance - transferNumberValue;
+
+  console.log(newBalance);
+
+  // Update currentBalance and store it in localStorage
+  currentBalance = newBalance;
+  localStorage.setItem("currentBalance", currentBalance.toString());
+
+  transferInput.value = "";
+  recipientName.value = "";
+  // Update the balance on the page
+  balanceElement.textContent = newBalance.toFixed(2);
+});
