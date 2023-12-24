@@ -34,6 +34,19 @@ confirmDepositBTN.addEventListener("click", function () {
 
   // Update the balance on the page
   balanceElement.textContent = newBalance.toFixed(2);
+  const history = `<div
+  class="mt-3 mb-3 bg-white w-75 mx-auto my-3 p-1 rounded bg-body-tertiary shadow text-success"
+>
+  <ul>
+    <li class="list-group-item">
+      <span id="transaction-type">Deposit</span>
+    </li>
+  </ul>
+  <h5 id="amount-transact" class="ms-3">Amount Deposited: $${depositNumberValue}</h5>
+  <span class="mt-2 ms-3">Balance: $${newBalance}</span>
+</div>`;
+
+  historyElement.innerHTML += history;
 });
 confirmWithdrawBTN.addEventListener("click", function () {
   let withdrawInput = document.getElementById("withdraw-input-value");
@@ -72,7 +85,8 @@ confirmTransferBTN.addEventListener("click", function () {
     isNaN(transferNumberValue) ||
     transferNumberValue == "" ||
     transferNumberValue <= 0 ||
-    transferNumberValue > currentBalance
+    transferNumberValue > currentBalance ||
+    recipientName.value.trim() === ""
   ) {
     alert("enter valid input");
     return;
