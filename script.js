@@ -74,6 +74,20 @@ confirmWithdrawBTN.addEventListener("click", function () {
 
   // Update the balance on the page
   balanceElement.textContent = newBalance.toFixed(2);
+
+  const history = `<div
+  class="mt-3 mb-3 bg-white w-75 mx-auto my-3 p-1 rounded bg-body-tertiary shadow text-danger"
+>
+  <ul>
+    <li class="list-group-item">
+      <span id="transaction-type">Withdraw</span>
+    </li>
+  </ul>
+  <h5 id="amount-transact" class="ms-3">Amount Withdr: $${withdrawNumberValue}</h5>
+  <span class="mt-2 ms-3">Balance: $${newBalance}</span>
+</div>`;
+
+  historyElement.innerHTML += history;
 });
 
 confirmTransferBTN.addEventListener("click", function () {
@@ -102,6 +116,22 @@ confirmTransferBTN.addEventListener("click", function () {
 
   transferInput.value = "";
   recipientName.value = "";
+  let recieversName = recipientName.value;
   // Update the balance on the page
   balanceElement.textContent = newBalance.toFixed(2);
+
+  const history = `<div
+  class="mt-3 mb-3 bg-white w-75 mx-auto my-3 p-1 rounded bg-body-tertiary shadow text-warning"
+>
+  <ul>
+    <li class="list-group-item">
+      <span id="transaction-type">Transfer</span>
+    </li>
+  </ul>
+  <h5 id="amount-transact" class="ms-3">Amount Transferred: $${transferNumberValue}</h5>
+  <span class="mt-2 ms-3">Balance: $${newBalance}</span>
+</div>`;
+
+historyElement.innerHTML += history;
+console.log(recieversName);
 });
