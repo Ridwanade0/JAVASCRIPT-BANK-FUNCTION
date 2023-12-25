@@ -80,6 +80,7 @@ confirmWithdrawBTN.addEventListener("click", function () {
 >
   <ul>
     <li class="list-group-item">
+    
       <span id="transaction-type">Withdraw</span>
     </li>
   </ul>
